@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Contact</h2>
+
+  {% if success %}
+    <p>Message has been sent.</p>
+  {% else %}
+    {% for message in form.name.errors %}
+      <div class="flash">{{ message }}</div>
+    {% endfor %}
+
+    {% for message in form.email.errors %}
+      <div class="flash">{{ message }}</div>
+    {% endfor %}
+
+    <form action="{{ url_for('contact') }}" method=post>
+      {{ form.hidden_tag() }}
+      <table class="grid" cellspacing="0">
+      <tbody><tr>
+        <td colspan="4">{{ form.name.label }}</td>
+        <td colspan="4">{{ form.name }}</td>
+      </tr>
+
+      <tr>
+        <td colspan="4">{{ form.email.label }}</td>
+        <td colspan="4">{{ form.email }}</td>
+      </tr>
+
+      <tr>
+        <td colspan="4">{{ form.password.label }}</td>
+        <td colspan="4">{{ form.password }}</td>
+      </tr>
+
+      <tr>
+        <td colspan="4">{{ form.recipient.label }}</td>
+        <td colspan="4">{{ form.recipient }}</td>
+      </tr>
+
+      <tr>
+        <td colspan="4">{{ form.subject.label }}</td>
+        <td colspan="4">{{ form.subject }}</td>
+      </tr>
+
+      <tr>
+        <td colspan="4">{{ form.text.label }}</td>
+        <td colspan="4">{{ form.text(cols="100", rows="10") }}</td>
+      </tr>
+
+      <tr>
+        <td colspan="4">{{ form.submit }}</td>
+      </tr>
+      </tbody></table>
+    </form>
+  {% endif %}
+{% endblock %}
